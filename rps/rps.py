@@ -35,11 +35,10 @@ class RPS:
         print(f'{self.player1.name}  vs.  {self.player2.name}')
         for i in range(100000):
             self.shoot()
-            if (i + 1) % 10000 == 0 and True:
+            if (i + 1) % 10000 == 0 and False:
                 print(f'After {i+1} rounds:')
                 print(f'    Player 1: {self.player1.wins} wins')
                 print(f'    Player 2: {self.player2.wins} wins')
-        print()
         print(f'{self.player1.name} won {round(self.player1.wins / (self.player1.wins + self.player2.wins) * 100, 2)} % of games vs. {self.player2.name}')
 
 
