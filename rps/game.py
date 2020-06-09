@@ -1,5 +1,3 @@
-from players import RPSStaticPlayer
-        
 class RPS:
     def __init__(self, player1, player2):
         player1.wins = 0
@@ -41,9 +39,3 @@ class RPS:
                 print(f'    Player 2: {self.player2.wins} wins')
         print(f'{self.player1.name} won {round(self.player1.wins / (self.player1.wins + self.player2.wins) * 100, 2)} % of games vs. {self.player2.name}')
 
-
-if __name__=="__main__":
-    p1 = RPSStaticPlayer("balanced", 0.33, 0.33, 0.33) 
-    p2 = RPSStaticPlayer("aggro", 0.5, 0.1, 0.4)
-    game = RPS(p1, p2)
-    game.simulate()
