@@ -3,29 +3,42 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 from game import kBandits
-from players import GreedyBandit, GreedyBandit2
+from players import GreedyBandit, GreedyBandit2, EpsGreedyBandit
 
 
 def main():
     k = 10 
     game = kBandits(k)
+
+    print("Arm means:")
     print([k.mean for k in game.arms])
-    player = GreedyBandit(k)
-    player2 = GreedyBandit2(k)
+
+    players = [
+        GreedyBandit(k),
+        GreedyBandit2(k),
+        EpsGreedyBandit(k, epsilon=0.5),
+        EpsGreedyBandit(k, epsilon=0.1),
+        EpsGreedyBandit(k, epsilon=0.01),
+    ]
+
     for i in tqdm(range(10000)):
-        arm = player.choose() 
-        reward = game.pull(arm)
-        player.add_reward(arm, reward) 
+        for p in players:
+            arm = p.choose()
+            reward = game.pull(arm)
+            p.add_reward(arm, reward)
 
-        arm2 = player2.choose()
-        reward2 = game.pull(arm2)
-        player2.add_reward(arm2, reward2) 
-
-    plt.plot(np.cumsum(player.rewards), label="Greedy Player 1")
-    plt.plot(np.cumsum(player2.rewards), label="Greedy Player 2")
-    plt.xlabel("t")
-    plt.ylabel("cumulative reward")
-    plt.legend()
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(15,12))
+    for p in players:
+        cum_rewards = np.cumsum(p.rewards)
+        mean_rewards = cum_rewards / np.arange(1, len(cum_rewards) + 1)
+        ax1.plot(cum_rewards, label=p.name)
+        ax2.plot(mean_rewards, label=p.name)
+    ax1.set_xlabel("t")
+    ax2.set_xlabel("t")
+    ax1.set_ylabel("cumulative reward", fontsize=16)
+    ax2.set_ylabel("mean reward", fontsize=16)
+    ax1.legend()
+    ax2.legend()
     plt.savefig("greedy_comparison.png")
 
 

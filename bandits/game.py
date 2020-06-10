@@ -12,7 +12,7 @@ class Arm:
 
 class kBandits:
     def __init__(self, k):
-        self.arms = [Arm(np.random.normal(5,3), np.random.uniform(0.1, 10)) for _ in range(k)]
+        self.arms = [Arm(np.random.normal(10, 10), np.random.uniform(1, 10)) for _ in range(k)]
 
     def pull(self, arm):
         return self.arms[arm].sample()
