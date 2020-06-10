@@ -27,6 +27,7 @@ class GreedyBandit2:
         
     def choose(self):
         return np.random.choice(np.flatnonzero(self.arm_samplemeans == self.arm_samplemeans.max())) 
+
     def add_reward(self, arm, reward):
         self.rewards.append(reward)
         self.arm_samplecounts[arm] += 1
