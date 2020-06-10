@@ -7,7 +7,7 @@ from players import GreedyBandit, GreedyBandit2, EpsGreedyBandit
 
 
 def main():
-    k = 10 
+    k = 10
     game = kBandits(k)
 
     print("Arm means:")
@@ -21,7 +21,7 @@ def main():
         EpsGreedyBandit(k, epsilon=0.01),
     ]
 
-    for i in tqdm(range(10000)):
+    for i in tqdm(range(20000)):
         for p in players:
             arm = p.choose()
             reward = game.pull(arm)
