@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Arm:
     def __init__(self, mean, std):
         self.mean = mean
@@ -7,6 +8,7 @@ class Arm:
 
     def sample(self):
         return np.random.normal(self.mean, self.std)
+
 
 class kBandits:
     def __init__(self, k):
