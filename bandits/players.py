@@ -35,6 +35,7 @@ class GreedyBandit2:
         self.arm_samplecounts[arm] += 1
         self.arm_samplemeans[arm] += 1 / self.arm_samplecounts[arm] * (reward - self.arm_samplemeans[arm])
 
+
 class EpsGreedyBandit:
     '''
     Epsilon Greedy bandit.
